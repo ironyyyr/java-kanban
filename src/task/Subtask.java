@@ -1,12 +1,19 @@
-package subtrack;
-
-import task.Task;
-import task.TaskStatus;
+package task;
 
 public class Subtask extends Task {
+    private int epicsId;
 
-    public Subtask(boolean isSubtask, int epicsId, String name, String info, TaskStatus status) {
-        super(isSubtask, epicsId, name, info, status);
+    public Subtask(int epicsId, String name, String info, TaskStatus status) {
+        super(name, info, status);
+        this.epicsId = epicsId;
+    }
+
+    public int getEpicsId() {
+        return epicsId;
+    }
+
+    public void setEpicsId(int epicsId) {
+        this.epicsId = epicsId;
     }
 
     @Override
