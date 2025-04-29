@@ -14,7 +14,7 @@ public class Main {
         Epic epic1 = new Epic("epic1", "Test epic1", TaskStatus.NEW);
         Subtask subtask11 = new Subtask(1, "Subtask11", "Test subtask11",
                 TaskStatus.NEW);
-        Subtask subtask12 = new Subtask( 1, "Subtask12", "Test subtask12",
+        Subtask subtask12 = new Subtask(1, "Subtask12", "Test subtask12",
                 TaskStatus.IN_PROGRESS);
 
         Epic epic2 = new Epic("epic2", "Test epic2", TaskStatus.NEW);
