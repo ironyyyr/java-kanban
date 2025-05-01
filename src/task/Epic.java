@@ -21,6 +21,18 @@ public class Epic extends Task {
         return subtaskArrayList;
     }
 
+    public void addSubtaskToEpicsSubtaskList(Subtask subtask) {
+        subtaskArrayList.add(subtask);
+    }
+
+    public void deleteSubtaskFromEpicsSubtaskList(Subtask subtask) {
+        subtaskArrayList.remove(subtask);
+    }
+
+    public void clearSubtasks() {
+        subtaskArrayList.clear();
+    }
+
     @Override
     public String toString() {
         return "Epic{" +
