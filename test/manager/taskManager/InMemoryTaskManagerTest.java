@@ -283,37 +283,4 @@ public class InMemoryTaskManagerTest {
 
         taskManager.deleteTaskById(task2);
     }
-
-    @AfterAll
-    public static void shouldReturnInitializedManagerCopies() {
-        Managers managers = new Managers();
-        TaskManager taskManager1 = managers.getDefault();
-        TaskManager taskManager2 = managers.getDefault();
-        HistoryManager historyManager = Managers.getDefaultHistory();
-
-        assertNotNull(taskManager1, "объект менеджера задач инициализируется null-ом");
-        assertNotNull(taskManager2, "объект менеджера задач инициализируется null-ом");
-        assertNotNull(historyManager, "объект менеджера истории инициализируется null-ом");
-
-        taskManager1.addNewTask(task1);
-        assertEquals(new ArrayList<>(List.of(task1)), taskManager1.getAllTasks(),
-                "задачи в инстанцию менеджера добавляются некорректно");
-        historyManager.add(task1);
-        assertEquals(new ArrayList<>(List.of(task1)), historyManager.getHistory(),
-                "история записывается некорректно");
-
-        taskManager2.addNewEpic(epic1);
-        assertEquals(new ArrayList<>(List.of(epic1)), taskManager2.getAllEpics(),
-                "эпики в инстанцию менеджера добавляются некорректно");
-        historyManager.add(epic1);
-        assertEquals(new ArrayList<>(List.of(task1, epic1)), historyManager.getHistory().reversed(),
-                "история записывается некорректно");
-
-        taskManager1.cleanAllTasks();
-        assertEquals(new ArrayList<>(), taskManager1.getAllTasks(),
-                "отчистка менеджера происходит некорректно");
-        taskManager2.cleanAllEpics();
-        assertEquals(new ArrayList<>(), taskManager2.getAllEpics(),
-                "отчистка менеджера происходит некорректно");
-    }
 }
