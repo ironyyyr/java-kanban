@@ -1,15 +1,12 @@
 import task.Epic;
-import manager.Manager;
+import manager.taskManager.InMemoryTaskManager;
 import task.Subtask;
 import task.Task;
 import task.TaskStatus;
 
-import java.util.HashMap;
-import java.util.Scanner;
-
 public class Main {
     public static void main(String[] args) {
-        Manager manager = new Manager();
+       /* InMemoryTaskManager inMemoryTaskManager = new InMemoryTaskManager();
 
         Epic epic1 = new Epic("epic1", "Test epic1", TaskStatus.NEW);
         Subtask subtask11 = new Subtask(1, "Subtask11", "Test subtask11",
@@ -23,59 +20,61 @@ public class Main {
 
         Task task1 = new Task("task1", "task1 info", TaskStatus.DONE);
         Task task2 = new Task("task2", "task2 info", TaskStatus.NEW);
-        manager.addNewEpic(epic1);
-        manager.addNewSubtask(subtask11);
-        manager.addNewSubtask(subtask12);
+        inMemoryTaskManager.addNewEpic(epic1);
+        inMemoryTaskManager.addNewSubtask(subtask11);
+        inMemoryTaskManager.addNewSubtask(subtask12);
 
-        manager.addNewEpic(epic2);
-        manager.addNewSubtask(subtask21);
+        inMemoryTaskManager.addNewEpic(epic2);
+        inMemoryTaskManager.addNewSubtask(subtask21);
 
-        manager.addNewTask(task1);
-        manager.addNewTask(task2);
+        inMemoryTaskManager.addNewTask(task1);
+        inMemoryTaskManager.addNewTask(task2);
 
-        for (Task tmpTasks : manager.getAllTasks()) {
+        for (Task tmpTasks : inMemoryTaskManager.getAllTasks()) {
             System.out.println(tmpTasks);
         }
-        for (Epic tmpEpics : manager.getAllEpics()) {
+        for (Epic tmpEpics : inMemoryTaskManager.getAllEpics()) {
             System.out.println(tmpEpics);
         }
 
-        for (Subtask tmpSubtask : manager.getAllSubtasks()) {
+        for (Subtask tmpSubtask : inMemoryTaskManager.getAllSubtasks()) {
             System.out.println(tmpSubtask);
         }
 
         System.out.println();
 
-        manager.updateSubtask(subtask12.getId(), new Subtask(epic1.getId(), "Subtask12",
+        inMemoryTaskManager.updateSubtask(subtask12.getId(), new Subtask(epic1.getId(), "Subtask12",
                 "Subtask12 updated", TaskStatus.NEW));
-        manager.updateTask(task1.getId(), new Task("task1", "task1 updated", TaskStatus.IN_PROGRESS));
-        manager.updateTask(task2.getId(), new Task("task2", "task2 updated", TaskStatus.DONE));
+        inMemoryTaskManager.updateTask(task1.getId(), new Task("task1", "task1 updated",
+                TaskStatus.IN_PROGRESS));
+        inMemoryTaskManager.updateTask(task2.getId(), new Task("task2", "task2 updated",
+                TaskStatus.DONE));
 
-        for (Task tmpTasks : manager.getAllTasks()) {
+        for (Task tmpTasks : inMemoryTaskManager.getAllTasks()) {
             System.out.println(tmpTasks);
         }
 
-        for (Epic tmpEpics : manager.getAllEpics()) {
+        for (Epic tmpEpics : inMemoryTaskManager.getAllEpics()) {
             System.out.println(tmpEpics);
         }
 
-        for (Subtask tmpSubtask : manager.getAllSubtasks()) {
+        for (Subtask tmpSubtask : inMemoryTaskManager.getAllSubtasks()) {
             System.out.println(tmpSubtask);
         }
 
         System.out.println();
 
-        manager.deleteEpicById(epic1);
-        manager.deleteTaskById(task1);
+        inMemoryTaskManager.deleteEpicById(epic1);
+        inMemoryTaskManager.deleteTaskById(task1);
 
-        for (Task tmpTasks : manager.getAllTasks()) {
+        for (Task tmpTasks : inMemoryTaskManager.getAllTasks()) {
             System.out.println(tmpTasks);
         }
-        for (Epic tmpEpics : manager.getAllEpics()) {
+        for (Epic tmpEpics : inMemoryTaskManager.getAllEpics()) {
             System.out.println(tmpEpics);
         }
-        for (Subtask tmpSubtask : manager.getAllSubtasks()) {
+        for (Subtask tmpSubtask : inMemoryTaskManager.getAllSubtasks()) {
             System.out.println(tmpSubtask);
-        }
+        } */
     }
 }
