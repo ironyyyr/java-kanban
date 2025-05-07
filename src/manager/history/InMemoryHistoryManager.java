@@ -1,4 +1,4 @@
-package manager.historyManager;
+package manager.history;
 
 import task.Task;
 
@@ -13,7 +13,8 @@ public class InMemoryHistoryManager implements HistoryManager {
         this.browsingHistory = new LinkedList<>();
     }
 
-    //Не до конца понял, что делать с доступом метода. Перенести все реализации менеджеров в один пакет?
+    //Только в конце понял, что менеджер - отдельный объект.
+    //Сомневался, что должен быть публичным метод в TaskManager-e получения истории
     @Override
     public void add(Task task) {
         if (browsingHistory.size() == 10) {

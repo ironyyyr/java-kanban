@@ -1,12 +1,11 @@
 package task;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import task.Subtask;
 import task.TaskStatus;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class SubtaskTest {
     private static Subtask subtask;
@@ -42,5 +41,15 @@ public class SubtaskTest {
     @Test
     public void shouldReturnFalseWithNotEqualSubtasks() {
         assertNotEquals(notEqualSubtask, subtask);
+    }
+
+    @Test
+    public void shouldCheckEqualSubtasks() {
+        assertEquals(subtask, equalSubtask);
+    }
+
+    @Test
+    public void shouldCheckNotEqualSubtasks() {
+        assertNotEquals(subtask, notEqualSubtask);
     }
 }

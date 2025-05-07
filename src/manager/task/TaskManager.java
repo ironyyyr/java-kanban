@@ -1,4 +1,4 @@
-package manager.taskManager;
+package manager.task;
 
 import task.Epic;
 import task.Subtask;
@@ -20,11 +20,11 @@ public interface TaskManager {
 
     void cleanAllEpics();
 
-    Task getTaskById(Task task);
+    Task getTaskById(int taskId);
 
-    Subtask getSubtaskById(Subtask subtask);
+    Subtask getSubtaskById(int subtaskId);
 
-    Epic getEpicById(Epic epic);
+    Epic getEpicById(int epicId);
 
     void addNewTask(Task task);
 
@@ -32,11 +32,14 @@ public interface TaskManager {
 
     void addNewEpic(Epic epic);
 
-    void deleteTaskById(Task task);
+    //Для задачи и всех остальных - оставил передачу объекта, а не id объекта
+    //Из-за того, что в случае с subtask - нам необходим дополнительно
+    //epicsId.
+    void deleteTask(Task task);
 
-    void deleteSubtaskById(Subtask subtask);
+    void deleteSubtask(Subtask subtask);
 
-    void deleteEpicById(Epic epic);
+    void deleteEpic(Epic epic);
 
     void updateTask(int taskId, Task task);
 
