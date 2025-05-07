@@ -75,4 +75,14 @@ public class TaskTest {
         notEqualTask.setId(2);
         assertNotEquals(task, notEqualTask);
     }
+
+    @Test
+    public void shouldCheckEqualTasks() {
+        assertEquals(task, equalTask);
+    }
+
+    @Test
+    public void shouldCheckNotEqualTasks() {
+        assertNotEquals(task, notEqualTask);
+    }
 }

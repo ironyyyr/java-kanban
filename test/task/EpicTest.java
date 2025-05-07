@@ -31,10 +31,13 @@ public class EpicTest {
 
         epic.setId(1);
         equalEpic.setId(1);
-        notEqualEpic.setId(2);
+        notEqualEpic.setId(1);
         subtask1.setId(2);
         subtask2.setId(3);
         epic.getSubtaskArrayList().add(subtask1);
+        equalEpic.getSubtaskArrayList().add(subtask1);
+        notEqualEpic.getSubtaskArrayList().add(subtask2);
+
 
         arrayListWithSubtask1 = new ArrayList<>(List.of(subtask1));
         arrayListWithSubtask1AndSubtask2 = new ArrayList<>(List.of(subtask1, subtask2));
