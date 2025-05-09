@@ -14,6 +14,8 @@ import task.TaskStatus;
 import java.util.ArrayList;
 import java.util.List;
 
+//Общий вопрос, не знаю куда оставлять комменты.
+//Будет ли на курсе опция ревьюить в гите, чтобы через комменты к pr-у, а не в платформе яндекса?
 public class InMemoryTaskManagerTest {
 
     private static TaskManager taskManager;
