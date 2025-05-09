@@ -26,11 +26,6 @@ public class InMemoryHistoryManager implements HistoryManager {
 
     @Override
     public List<Task> getHistory() {
-        List<Task> list = new ArrayList<>();
-        for (int i = browsingHistory.size() - 1; i >= 0; i--) {
-            list.add(browsingHistory.get(i));
-        }
-
-        return list;
+        return new ArrayList<>(browsingHistory.reversed());
     }
 }
