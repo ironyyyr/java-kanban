@@ -83,10 +83,4 @@ public class EpicTest {
     public void shouldReturnFalseWithNotEqualEpic() {
         assertNotEquals(notEqualEpic, epic);
     }
-
-    //Компилятор не дает добавить из-за того, что по умолчанию addSubtaskToEpicsSubtaskList принимает Epic
-//    @Test
-//    public void shouldThrowIllegalArgumentExceptionWhenTryingAddEpicToEpicsSubtaskArrayList() {
-//        assertThrows(IllegalArgumentException.class, () -> epic.addSubtaskToEpicsSubtaskList(epic));
-//    }
 }

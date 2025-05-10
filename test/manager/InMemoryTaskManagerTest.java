@@ -14,8 +14,6 @@ import task.TaskStatus;
 import java.util.ArrayList;
 import java.util.List;
 
-//Общий вопрос, не знаю куда оставлять комменты.
-//Будет ли на курсе опция ревьюить в гите, чтобы через комменты к pr-у, а не в платформе яндекса?
 public class InMemoryTaskManagerTest {
 
     private static TaskManager taskManager;
@@ -73,7 +71,7 @@ public class InMemoryTaskManagerTest {
         ArrayList<Subtask> arrayList = new ArrayList<>(List.of(subtask11));
         assertEquals(arrayList, taskManager.getAllSubtasks(), "Список подзадач не пуст");
 
-        taskManager.deleteSubtask(subtask11);
+        taskManager.deleteSubtaskById(subtask11.getId());
         arrayList.remove(subtask11);
         assertEquals(arrayList, taskManager.getAllSubtasks(), "В эпике есть лишние подзадачи");
     }
@@ -142,7 +140,7 @@ public class InMemoryTaskManagerTest {
         assertEquals(TaskStatus.IN_PROGRESS, taskManager.getEpicById(epic1.getId()).getStatus(),
                 "статус эпика не актуален после добавления подзадачи со статусом не NEW");
 
-        taskManager.deleteSubtask(subtask12);
+        taskManager.deleteSubtaskById(subtask12.getId());
 
         assertEquals(TaskStatus.NEW, taskManager.getEpicById(epic1.getId()).getStatus(),
                 "статус эпика не актуален после удаления подзадачи");
@@ -163,13 +161,13 @@ public class InMemoryTaskManagerTest {
     public void shouldDeleteTaskById() {
         assertEquals(new ArrayList<>(List.of(task1)), taskManager.getAllTasks(), "в менеджере нет задач");
 
-        taskManager.deleteTask(task1);
+        taskManager.deleteTaskById(task1.getId());
         assertEquals(new ArrayList<>(), taskManager.getAllTasks(), "метод удаления задач работает некорректно");
     }
 
     @Test
     public void shouldDeleteEpicById() {
-        taskManager.deleteEpic(epic1);
+        taskManager.deleteEpicById(epic1.getId());
         assertFalse(taskManager.getAllEpics().contains(epic1), "метод не удаляет эпик");
         assertFalse(taskManager.getAllSubtasks().contains(subtask11),
                 "метод не удаляет подзадачи при удалении эпика");
@@ -215,7 +213,7 @@ public class InMemoryTaskManagerTest {
         assertEquals(new ArrayList<>(List.of(subtask11)), taskManager.getAllSubtasks(),
                 "в менеджере нет subtask11");
 
-        taskManager.deleteSubtask(subtask11);
+        taskManager.deleteSubtaskById(subtask11.getId());
         assertEquals(new ArrayList<>(), taskManager.getAllSubtasks(), "метод удаляет подзадачи некорректно");
         for (Epic epic : taskManager.getAllEpics()) {
             for (Subtask subtask : epic.getSubtaskArrayList()) {

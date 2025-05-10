@@ -70,14 +70,16 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public Task getTaskById(int taskId) {
-        historyManager.add(taskList.get(taskId));
-        return taskList.get(taskId);
+        Task searchedTask = taskList.get(taskId);
+        historyManager.add(searchedTask);
+        return searchedTask;
     }
 
     @Override
     public Subtask getSubtaskById(int subtaskId) {
-        historyManager.add(subtaskList.get(subtaskId));
-        return subtaskList.get(subtaskId);
+        Subtask searchedSubtask = subtaskList.get(subtaskId);
+        historyManager.add(searchedSubtask);
+        return searchedSubtask;
     }
 
     @Override
@@ -94,7 +96,7 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public void addNewSubtask(Subtask subtask) throws IllegalArgumentException {
+    public void addNewSubtask(Subtask subtask) {
         if (!epicsList.containsKey(subtask.getEpicsId())) {
             throw new IllegalArgumentException("Нельзя добавить подзадачу: эпик с id="
                     + subtask.getEpicsId() + " он не существует");
@@ -147,25 +149,27 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public void deleteTask(Task task) {
-        taskList.remove(task.getId());
+    public void deleteTaskById(int taskId) {
+        taskList.remove(taskId);
     }
 
     @Override
-    public void deleteSubtask(Subtask subtask) {
-        subtaskList.remove(subtask.getId());
-        epicsList.get(subtask.getEpicsId()).deleteSubtaskFromEpicsSubtaskList(subtask);
-        Epic updatingEpic = epicsList.get(subtask.getEpicsId());
-        updateEpicStatus(updatingEpic);
+    public void deleteSubtaskById(int subtaskId) {
+        Subtask subtask = subtaskList.remove(subtaskId);
+        if (subtask != null) {
+            epicsList.get(subtask.getEpicsId()).deleteSubtaskFromEpicsSubtaskList(subtask);
+            Epic updatingEpic = epicsList.get(subtask.getEpicsId());
+            updateEpicStatus(updatingEpic);
+        }
     }
 
     @Override
-    public void deleteEpic(Epic epic) {
-        epicsList.remove(epic.getId());
-
-        for (Subtask subtask : epic.getSubtaskArrayList()) {
+    public void deleteEpicById(int epicId) {
+        for (Subtask subtask : epicsList.get(epicId).getSubtaskArrayList()) {
             subtaskList.remove(subtask.getId());
         }
+
+        epicsList.remove(epicId);
     }
 
     @Override
