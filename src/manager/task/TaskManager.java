@@ -28,18 +28,15 @@ public interface TaskManager {
 
     void addNewTask(Task task);
 
-    void addNewSubtask(Subtask subtask) throws IllegalArgumentException;
+    void addNewSubtask(Subtask subtask);
 
     void addNewEpic(Epic epic);
 
-    //Для задачи и всех остальных - оставил передачу объекта, а не id объекта
-    //Из-за того, что в случае с subtask - нам необходим дополнительно
-    //epicsId.
-    void deleteTask(Task task);
+    void deleteTaskById(int taskId);
 
-    void deleteSubtask(Subtask subtask);
+    void deleteSubtaskById(int subtaskId);
 
-    void deleteEpic(Epic epic);
+    void deleteEpicById(int epicId);
 
     void updateTask(int taskId, Task task);
 

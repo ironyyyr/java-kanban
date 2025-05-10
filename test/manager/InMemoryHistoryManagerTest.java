@@ -24,9 +24,6 @@ public class InMemoryHistoryManagerTest {
     private static Epic epic;
     private static Task task;
 
-    //Вот думаю, тут либо @BeforeAll, либо @BeforeEach
-    //Не влияет на потребление памяти, загрузку стенда в процессе тестирования такие итеративные запуски
-    //Или тут нет смысла думать о потреблении памяти и тд?
     @BeforeEach
     public void setHistoryManager() {
         Managers managers = new Managers();
@@ -78,22 +75,5 @@ public class InMemoryHistoryManagerTest {
         }
 
         assertEquals(10, historyManager.getHistory().size(), "элементов в history больше, чем 10");
-
-//        for (int i = 0; i < 5; i++) {
-//            historyManager.add(task);
-//            historyManager.add(epic);
-//            historyManager.add(task);
-//            linkedList.add(task);
-//            linkedList.add(epic);
-//            linkedList.add(task);
-//        }
-//
-//        List<Task> history = historyManager.getHistory().reversed();
-//        for (int i = 0; i < 10; i++) {
-//            assertEquals(linkedList.getLast(), history.getLast(),
-//                    "элементы history, если событий больше 10 отображаются некорректно");
-//            linkedList.removeLast();
-//            history.removeLast();
-//        }
     }
 }
