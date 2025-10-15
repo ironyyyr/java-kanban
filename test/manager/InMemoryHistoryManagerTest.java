@@ -22,6 +22,8 @@ public class InMemoryHistoryManagerTest {
 
     private static HistoryManager historyManager;
     private static Epic epic;
+    private static Epic epic1;
+    private static Epic epic2;
     private static Task task;
 
     @BeforeEach
@@ -29,7 +31,11 @@ public class InMemoryHistoryManagerTest {
         Managers managers = new Managers();
         historyManager = Managers.getDefaultHistory();
         epic = new Epic("test", "test");
+        epic.setId(1);
         task = new Task("task", "task");
+        task.setId(2);
+        epic1 = new Epic("test", "test");
+        epic.setId(3);
 
     }
 
@@ -40,40 +46,41 @@ public class InMemoryHistoryManagerTest {
 
     @Test
     public void shouldCheckHistoryAfter6GetOperations() {
-        ArrayList<Task> arrayList = new ArrayList<>();
+        ArrayList<Task> arrayList = new ArrayList<>(List.of(task, epic, epic1));
 
-        for (int i = 0; i < 3; i++) {
-            historyManager.add(task);
-            historyManager.add(epic);
-            arrayList.add(task);
-            arrayList.add(epic);
-        }
+        historyManager.add(task);
+        historyManager.add(epic);
+        historyManager.add(epic1);
 
-        assertEquals(arrayList, historyManager.getHistory().reversed(),
-                "6 элементов в history хранятся неверно");
+            assertEquals(arrayList, historyManager.getHistory(),
+                    "3 элемента в history хранятся неверно");
     }
 
     @Test
     public void shouldCheckHistoryAfter10GetOperations() {
-        ArrayList<Task> arrayList = new ArrayList<>();
+        ArrayList<Task> arrayList = new ArrayList<>(List.of(task, epic));
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 2; i++) {
             historyManager.add(task);
             historyManager.add(epic);
-            arrayList.add(task);
-            arrayList.add(epic);
         }
 
-        assertEquals(arrayList, historyManager.getHistory().reversed(),
-                "10 элементов в history хранятся неверно");
+        assertEquals(arrayList, historyManager.getHistory(),
+                "2 элемента в history перезаписываются неверно");
     }
 
     @Test
     public void shouldCheckHistoryAfter15GetOperations() {
         for (int i = 0; i < 12; i++) {
+            Task task = new Task("task", "task");
+            task.setId(i);
             historyManager.add(task);
         }
 
-        assertEquals(10, historyManager.getHistory().size(), "элементов в history больше, чем 10");
+        assertEquals(12, historyManager.getHistory().size(),
+                "убрано ограничение на хранение 10 элементов");
     }
+
+    @Test
+    public void shouldCheck
 }
