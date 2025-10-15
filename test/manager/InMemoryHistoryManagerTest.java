@@ -80,7 +80,4 @@ public class InMemoryHistoryManagerTest {
         assertEquals(12, historyManager.getHistory().size(),
                 "убрано ограничение на хранение 10 элементов");
     }
-
-    @Test
-    public void shouldCheck
 }
