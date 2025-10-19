@@ -45,15 +45,15 @@ public class InMemoryHistoryManagerTest {
     }
 
     @Test
-    public void shouldCheckHistoryAfter6GetOperations() {
+    public void shouldCheckHistoryAfter3GetOperations() {
         ArrayList<Task> arrayList = new ArrayList<>(List.of(task, epic, epic1));
 
         historyManager.add(task);
         historyManager.add(epic);
         historyManager.add(epic1);
 
-            assertEquals(arrayList, historyManager.getHistory(),
-                    "3 элемента в history хранятся неверно");
+        assertEquals(arrayList, historyManager.getHistory(),
+                "3 элемента в history хранятся неверно");
     }
 
     @Test
@@ -79,5 +79,47 @@ public class InMemoryHistoryManagerTest {
 
         assertEquals(12, historyManager.getHistory().size(),
                 "убрано ограничение на хранение 10 элементов");
+    }
+
+    @Test
+    public void shouldCheckHistoryAfterRewritingFirstElement() {
+        ArrayList<Task> arrayList = new ArrayList<>(List.of(task, epic, epic1));
+
+        historyManager.add(task);
+        historyManager.add(epic);
+        historyManager.add(epic1);
+
+        historyManager.add(epic1);
+
+        assertEquals(arrayList, historyManager.getHistory(),
+                "3 элемента в history хранятся неверно");
+    }
+
+    @Test
+    public void shouldCheckHistoryAfterRewritingMidElement() {
+        ArrayList<Task> arrayList = new ArrayList<>(List.of(task, epic1, epic));
+
+        historyManager.add(task);
+        historyManager.add(epic);
+        historyManager.add(epic1);
+
+        historyManager.add(epic);
+
+        assertEquals(arrayList, historyManager.getHistory(),
+                "3 элемента в history хранятся неверно");
+    }
+
+    @Test
+    public void shouldCheckHistoryAfterRewritingLastElement() {
+        ArrayList<Task> arrayList = new ArrayList<>(List.of(epic, epic1, task));
+
+        historyManager.add(task);
+        historyManager.add(epic);
+        historyManager.add(epic1);
+
+        historyManager.add(task);
+
+        assertEquals(arrayList, historyManager.getHistory(),
+                "3 элемента в history хранятся неверно");
     }
 }

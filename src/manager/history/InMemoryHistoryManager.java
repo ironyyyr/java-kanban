@@ -20,11 +20,13 @@ public class InMemoryHistoryManager implements HistoryManager {
         }
     }
 
-    private final LinkedList<Node> browsingHistory;
+    private Node head;
+    private Node tail;
     private final HashMap<Integer, Node> browsingNodes;
 
     public InMemoryHistoryManager() {
-        this.browsingHistory = new LinkedList<>();
+        this.head = null;
+        this.tail = null;
         this.browsingNodes = new HashMap<>();
     }
 
@@ -42,12 +44,14 @@ public class InMemoryHistoryManager implements HistoryManager {
             remove(node.data.getId());
         }
 
-        if (!browsingHistory.isEmpty()) {
-            node.prev = browsingHistory.getLast();
-            browsingHistory.getLast().next = node;
+        if (tail == null && head == null) {
+            tail = node;
+            head = node;
+        } else {
+            tail.next = node;
+            node.prev = tail;
+            tail = node;
         }
-
-        browsingHistory.add(node);
     }
 
     @Override
@@ -56,25 +60,38 @@ public class InMemoryHistoryManager implements HistoryManager {
     }
 
     public List<Task> getTasks() {
-        if (browsingHistory.isEmpty()) {
+        if (tail == null && head == null) {
             return new ArrayList<>();
         }
 
-        Node task = browsingHistory.getLast();
-        Node prevTask = task.prev;
-
         ArrayList<Task> tasksList = new ArrayList<>();
-        tasksList.add(task.data);
+        tasksList.add(head.data);
 
-        while (prevTask != null) {
-            tasksList.add(prevTask.data);
-            prevTask = prevTask.prev;
+        Node currNode = head;
+
+        while (currNode.next != null) {
+
+            tasksList.add(currNode.next.data);
+            currNode = currNode.next;
         }
 
-        return tasksList.reversed();
+        return tasksList;
     }
 
     public void removeNode(Node node) {
+        if (tail == head) {
+            head = null;
+            tail = null;
+        }
+
+        if (node == head) {
+            head = node.next;
+        }
+
+        if (node == tail) {
+            tail = node.prev;
+        }
+
         Node nextNode = node.next;
         Node prevNode = node.prev;
 
@@ -86,13 +103,16 @@ public class InMemoryHistoryManager implements HistoryManager {
             prevNode.next = nextNode;
         }
 
-        node.next = null;
-        node.prev = null;
     }
 
     @Override
     public void remove(int id) {
         removeNode(browsingNodes.get(id));
         browsingNodes.remove(id);
+    }
+
+    @Override
+    public boolean checkIdInBrowsingNodes(int id) {
+        return browsingNodes.containsKey(id);
     }
 }

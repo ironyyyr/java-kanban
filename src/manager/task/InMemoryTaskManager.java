@@ -51,21 +51,34 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public void cleanAllTasks() {
-        taskList.clear();
+        for (Integer taskId : taskList.keySet()) {
+            if (historyManager.checkIdInBrowsingNodes(taskId)) {
+                historyManager.remove(taskId);
+            }
+            taskList.remove(taskId);
+        }
     }
 
     @Override
     public void cleanAllSubtasks() {
-        for (Epic epic : epicsList.values()) {
-            epic.clearSubtasks();
+        for (Integer subtaskId : subtaskList.keySet()) {
+            if (historyManager.checkIdInBrowsingNodes(subtaskId)) {
+                historyManager.remove(subtaskId);
+            }
+            subtaskList.remove(subtaskId);
         }
-        subtaskList.clear();
     }
 
     @Override
     public void cleanAllEpics() {
-        subtaskList.clear();
-        epicsList.clear();
+        cleanAllSubtasks();
+
+        for (Integer epicId : epicsList.keySet()) {
+            if (historyManager.checkIdInBrowsingNodes(epicId)) {
+                historyManager.remove(epicId);
+            }
+            epicsList.remove(epicId);
+        }
     }
 
     @Override
@@ -150,12 +163,20 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public void deleteTaskById(int taskId) {
+        if (historyManager.checkIdInBrowsingNodes(taskId)) {
+            historyManager.remove(taskId);
+        }
+
         taskList.remove(taskId);
     }
 
     @Override
     public void deleteSubtaskById(int subtaskId) {
         Subtask subtask = subtaskList.remove(subtaskId);
+        if (historyManager.checkIdInBrowsingNodes(subtaskId)) {
+            historyManager.remove(subtaskId);
+        }
+
         if (subtask != null) {
             epicsList.get(subtask.getEpicsId()).deleteSubtaskFromEpicsSubtaskList(subtask);
             Epic updatingEpic = epicsList.get(subtask.getEpicsId());
@@ -166,9 +187,15 @@ public class InMemoryTaskManager implements TaskManager {
     @Override
     public void deleteEpicById(int epicId) {
         for (Subtask subtask : epicsList.get(epicId).getSubtaskArrayList()) {
+            if (historyManager.checkIdInBrowsingNodes(subtask.getId())) {
+                historyManager.remove(subtask.getId());
+            }
             subtaskList.remove(subtask.getId());
         }
 
+        if (historyManager.checkIdInBrowsingNodes(epicId)) {
+            historyManager.remove(epicId);
+        }
         epicsList.remove(epicId);
     }
 
