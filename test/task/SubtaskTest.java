@@ -2,8 +2,6 @@ package task;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import task.Subtask;
-import task.TaskStatus;
 
 import static org.junit.jupiter.api.Assertions.*;
 

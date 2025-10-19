@@ -1,22 +1,15 @@
 package manager;
 
 import manager.history.HistoryManager;
-import manager.task.InMemoryTaskManager;
-import manager.task.TaskManager;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import task.Epic;
-import task.Subtask;
 import task.Task;
-import task.TaskStatus;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class InMemoryHistoryManagerTest {
 

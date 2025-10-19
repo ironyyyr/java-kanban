@@ -1,8 +1,6 @@
 package task;
 
 import org.junit.jupiter.api.Test;
-import task.Task;
-import task.TaskStatus;
 
 import static org.junit.jupiter.api.Assertions.*;
 

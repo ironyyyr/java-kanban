@@ -3,9 +3,6 @@ package task;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import task.Epic;
-import task.Subtask;
-import task.TaskStatus;
 
 import java.util.ArrayList;
 import java.util.List;
