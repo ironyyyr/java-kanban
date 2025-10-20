@@ -78,40 +78,38 @@ public class InMemoryHistoryManager implements HistoryManager {
     }
 
     public void removeNode(Node node) {
-        if (tail == head) {
-            head = null;
-            tail = null;
+        if (node == null) {
+            return;
         }
 
-        if (node == head) {
-            head = node.next;
-        }
+         if (tail == head) {
+             tail = null;
+             head = null;
+             return;
+         }
 
-        if (node == tail) {
-            tail = node.prev;
-        }
+         if (node == tail) {
+             tail = node.prev;
+             tail.next = null;
+             return;
+         }
 
-        Node nextNode = node.next;
-        Node prevNode = node.prev;
+         if (node == head) {
+             head = node.next;
+             head.prev = null;
+             return;
+         }
 
-        if (nextNode != null) {
-            nextNode.prev = prevNode;
-        }
+         Node prevNode = node.prev;
+         Node nextNode = node.next;
 
-        if (prevNode != null) {
-            prevNode.next = nextNode;
-        }
-
+         prevNode.next = nextNode;
+         nextNode.prev = prevNode;
     }
 
     @Override
     public void remove(int id) {
         removeNode(browsingNodes.get(id));
         browsingNodes.remove(id);
-    }
-
-    @Override
-    public boolean checkIdInBrowsingNodes(int id) {
-        return browsingNodes.containsKey(id);
     }
 }
