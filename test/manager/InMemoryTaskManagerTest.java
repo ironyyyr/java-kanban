@@ -133,7 +133,8 @@ public class InMemoryTaskManagerTest {
 
     @Test
     public void shouldUpdateEpicStatusWithSubtaskStatus() {
-        assertEquals(TaskStatus.NEW, taskManager.getEpicById(epic1.getId()).getStatus(), "статус эпика не актуален");
+        assertEquals(TaskStatus.NEW, taskManager.getEpicById(epic1.getId()).getStatus(),
+                "статус эпика не актуален");
 
         Subtask subtask12 = new Subtask(epic1.getId(), "test", "test", TaskStatus.IN_PROGRESS);
         taskManager.addNewSubtask(subtask12);
